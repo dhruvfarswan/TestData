@@ -74,15 +74,15 @@ namespace DatacomTest.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Login to the application")]
+        [NUnit.Framework.DescriptionAttribute("Navigate to the error page")]
         [NUnit.Framework.TestCaseAttribute("chrome", null)]
         [NUnit.Framework.TestCaseAttribute("edge", null)]
-        public void LoginToTheApplication(string browser, string[] exampleTags)
+        public void NavigateToTheErrorPage(string browser, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("Browser", browser);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login to the application", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to the error page", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 4
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -98,34 +98,28 @@ this.ScenarioInitialize(scenarioInfo);
                             "Url"});
                 table1.AddRow(new string[] {
                             string.Format("{0}", browser),
-                            "http://automationpractice.com/index.php"});
+                            "https://qa-practice.netlify.app/bugs-form"});
 #line 5
  testRunner.Given("I navigate to the homepage with the below envrionment", ((string)(null)), table1, "Given ");
 #line hidden
 #line 8
- testRunner.When("I click on login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 9
- testRunner.Then("Login page should be displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 10
- testRunner.When("I enter username and password as testuserauto@gmail.com and QssCD123#", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then("Error Home page should be displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Register to the application")]
+        [NUnit.Framework.DescriptionAttribute("Verify the Last Name is trimmed after regirstration")]
         [NUnit.Framework.TestCaseAttribute("chrome", null)]
         [NUnit.Framework.TestCaseAttribute("edge", null)]
-        public void RegisterToTheApplication(string browser, string[] exampleTags)
+        public void VerifyTheLastNameIsTrimmedAfterRegirstration(string browser, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("Browser", browser);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register to the application", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 16
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify the Last Name is trimmed after regirstration", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 15
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -140,62 +134,57 @@ this.ScenarioInitialize(scenarioInfo);
                             "Url"});
                 table2.AddRow(new string[] {
                             string.Format("{0}", browser),
-                            "http://automationpractice.com/index.php"});
-#line 17
+                            "https://qa-practice.netlify.app/bugs-form"});
+#line 16
  testRunner.Given("I navigate to the homepage with the below envrionment", ((string)(null)), table2, "Given ");
 #line hidden
-#line 20
- testRunner.When("I click on login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 21
- testRunner.Then("Login page should be displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 22
- testRunner.When("I enter Email address and click on create account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 23
- testRunner.Then("Create an account page is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 19
+ testRunner.Then("Error Home page should be displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
                             "LastName",
-                            "Password",
-                            "Address",
-                            "City",
-                            "State",
-                            "ZipCode",
-                            "MobileNo"});
+                            "PhoneNumber",
+                            "Country",
+                            "EmailAddress",
+                            "Password"});
                 table3.AddRow(new string[] {
-                            "John",
+                            "Johnny",
                             "Bravo",
-                            "qwqwe@@",
-                            "ABC Street",
-                            "XYZ",
-                            "Kansas",
-                            "\"66002\"",
-                            "\"9898987898\""});
-#line 24
- testRunner.And("I Enter all the below required details", ((string)(null)), table3, "And ");
+                            "\"8109090091\"",
+                            "New Zealand",
+                            "abc@gmail.com",
+                            "Pwdqwe"});
+#line 20
+ testRunner.And("I Enter all the form details", ((string)(null)), table3, "And ");
 #line hidden
-#line 27
- testRunner.Then("I click on Register button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 23
+ testRunner.And("I click on Register button on Error Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 24
+ testRunner.Then("I verify the Success message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 25
+ testRunner.Then("Verify Last Name is trimmed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add 2 products to shopping cart")]
+        [NUnit.Framework.DescriptionAttribute("Verify the Phone Number is last digit is one greater than actual phone number aft" +
+            "er regirstration")]
         [NUnit.Framework.TestCaseAttribute("chrome", null)]
         [NUnit.Framework.TestCaseAttribute("edge", null)]
-        public void Add2ProductsToShoppingCart(string browser, string[] exampleTags)
+        public void VerifyThePhoneNumberIsLastDigitIsOneGreaterThanActualPhoneNumberAfterRegirstration(string browser, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("Browser", browser);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add 2 products to shopping cart", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 35
- this.ScenarioInitialize(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify the Phone Number is last digit is one greater than actual phone number aft" +
+                    "er regirstration", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 32
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -209,24 +198,218 @@ this.ScenarioInitialize(scenarioInfo);
                             "Url"});
                 table4.AddRow(new string[] {
                             string.Format("{0}", browser),
-                            "http://automationpractice.com/index.php"});
-#line 36
+                            "https://qa-practice.netlify.app/bugs-form"});
+#line 33
  testRunner.Given("I navigate to the homepage with the below envrionment", ((string)(null)), table4, "Given ");
 #line hidden
-#line 39
- testRunner.When("I click on Add to Cart for 1 product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 36
+ testRunner.Then("Error Home page should be displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "PhoneNumber",
+                            "Country",
+                            "EmailAddress",
+                            "Password"});
+                table5.AddRow(new string[] {
+                            "Johnny",
+                            "Bravo",
+                            "\"8109090091\"",
+                            "New Zealand",
+                            "abc@gmail.com",
+                            "Pwdqwe"});
+#line 37
+ testRunner.And("I Enter all the form details", ((string)(null)), table5, "And ");
 #line hidden
 #line 40
- testRunner.And("I click on Continue Shopping button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I click on Register button on Error Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 41
- testRunner.And("I click on Add to Cart for 2 product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("I verify the Success message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 42
- testRunner.And("I click on Continue Shopping button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("Verify Phone Number is incremented by one", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 43
- testRunner.Then("I verify the total price of the products in the cart is correct or not", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Verify the Last Name field is required")]
+        [NUnit.Framework.TestCaseAttribute("chrome", null)]
+        [NUnit.Framework.TestCaseAttribute("edge", null)]
+        public void VerifyTheLastNameFieldIsRequired(string browser, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Browser", browser);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify the Last Name field is required", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 49
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                            "BrowserName",
+                            "Url"});
+                table6.AddRow(new string[] {
+                            string.Format("{0}", browser),
+                            "https://qa-practice.netlify.app/bugs-form"});
+#line 50
+ testRunner.Given("I navigate to the homepage with the below envrionment", ((string)(null)), table6, "Given ");
+#line hidden
+#line 53
+ testRunner.Then("Error Home page should be displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "PhoneNumber",
+                            "Country",
+                            "EmailAddress",
+                            "Password"});
+                table7.AddRow(new string[] {
+                            "Johnny",
+                            "",
+                            "\"8109090091\"",
+                            "New Zealand",
+                            "abc@gmail.com",
+                            "Pwdqwe"});
+#line 54
+ testRunner.And("I Enter all the form details", ((string)(null)), table7, "And ");
+#line hidden
+#line 57
+ testRunner.And("I click on Register button on Error Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 58
+ testRunner.Then("I verify the Success message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 59
+ testRunner.Then("Verify Last Name field is not blank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Verify Password length field is between six and twenty characters")]
+        [NUnit.Framework.TestCaseAttribute("chrome", null)]
+        [NUnit.Framework.TestCaseAttribute("edge", null)]
+        public void VerifyPasswordLengthFieldIsBetweenSixAndTwentyCharacters(string browser, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Browser", browser);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify Password length field is between six and twenty characters", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 66
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                            "BrowserName",
+                            "Url"});
+                table8.AddRow(new string[] {
+                            string.Format("{0}", browser),
+                            "https://qa-practice.netlify.app/bugs-form"});
+#line 67
+ testRunner.Given("I navigate to the homepage with the below envrionment", ((string)(null)), table8, "Given ");
+#line hidden
+#line 70
+ testRunner.Then("Error Home page should be displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "PhoneNumber",
+                            "Country",
+                            "EmailAddress",
+                            "Password"});
+                table9.AddRow(new string[] {
+                            "Johnny",
+                            "Depp",
+                            "\"8109090091\"",
+                            "New Zealand",
+                            "abc@gmail.com",
+                            "Fivee"});
+#line 71
+ testRunner.And("I Enter all the form details", ((string)(null)), table9, "And ");
+#line hidden
+#line 74
+ testRunner.And("I click on Register button on Error Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 75
+ testRunner.Then("Verify Password length field is between six and twenty characters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Verify Phone Number field is atleast 10 characters")]
+        [NUnit.Framework.TestCaseAttribute("chrome", null)]
+        [NUnit.Framework.TestCaseAttribute("edge", null)]
+        public void VerifyPhoneNumberFieldIsAtleast10Characters(string browser, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Browser", browser);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify Phone Number field is atleast 10 characters", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 82
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                            "BrowserName",
+                            "Url"});
+                table10.AddRow(new string[] {
+                            string.Format("{0}", browser),
+                            "https://qa-practice.netlify.app/bugs-form"});
+#line 83
+ testRunner.Given("I navigate to the homepage with the below envrionment", ((string)(null)), table10, "Given ");
+#line hidden
+#line 86
+ testRunner.Then("Error Home page should be displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "PhoneNumber",
+                            "Country",
+                            "EmailAddress",
+                            "Password"});
+                table11.AddRow(new string[] {
+                            "Johnny",
+                            "Depp",
+                            "\"81090\"",
+                            "New Zealand",
+                            "abc@gmail.com",
+                            "Fivee"});
+#line 87
+ testRunner.And("I Enter all the form details", ((string)(null)), table11, "And ");
+#line hidden
+#line 90
+ testRunner.And("I click on Register button on Error Page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 91
+ testRunner.Then("Verify Phone Number field length is atleast ten characters", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

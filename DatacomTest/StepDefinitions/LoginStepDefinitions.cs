@@ -11,11 +11,7 @@ namespace DatacomTest.StepDefinitions
     public class GetScenarioContext : DriverHelper
     {
         IWebDriver Driver;
-        ArrayList pricelist = new ArrayList();
-        HomePage homePage = new HomePage();
-        LoginPage loginPage = new LoginPage();
-        RegistrationPage registrationPage = new RegistrationPage(); 
-        CartPage cartPage = new CartPage();
+        ErrorHomePage errorPage = new ErrorHomePage();
         private readonly ScenarioContext _scenarioContext;
 
         public GetScenarioContext(ScenarioContext scenarioContext)
@@ -31,85 +27,96 @@ namespace DatacomTest.StepDefinitions
             Driver.Url = data.Url;
         }
 
-        [When(@"I click on login button")]
-        public void GivenIClickOnLoginButton()
+        [Then(@"Error Home page should be displayed")]
+        public void ThenErrorHomePageShouldBeDisplayed()
         {
-            homePage.ClickSignIn();
+            Thread.Sleep(1000);
+            Assert.That(errorPage.IsErrorPageDisplayed());
+            errorPage.ClickSideBarCollapse();
+            Thread.Sleep(1000);
         }
 
-        [Then(@"Login page should be displayed")]
-        public void ThenLoginPageShouldBeDisplayed()
+    
+        [Then(@"I Enter all the form details")]
+        public void ThenIEnterAllTheFormDetails(Table table)
         {
-            Assert.IsTrue(loginPage.IsLoginFormDisplayed());                   
-        }
-
-        [When(@"I enter username and password as (.*) and (.*)")]
-        public void WhenIEnterUsernameAndPasswordAsTestuserautoGmail_ComAndQssCD(string username, string pwd)
-        {
-            loginPage.EnterUserNameAndPasswrd(username, pwd);
-            loginPage.ClickSignIn();
-            Thread.Sleep(2000);
-        }
-
-        [When(@"I enter Email address and click on create account")]
-        public void WhenIEnterEmailAddressAndClickOnCreateAccount()
-        {
-            string emailIdRand= Guid.NewGuid().ToString("n").Substring(0, 4);
-            string emailId = "test" + emailIdRand + "@gmail.com";
-            loginPage.EnterEmailId(emailId);
-            loginPage.ClickCreateAccount();
-            Thread.Sleep(5000);
-        }
-
-        [Then(@"Create an account page is displayed")]
-        public void ThenCreateAnAccountPageIsDisplayed()
-        {
-            Assert.IsTrue(registrationPage.IsRegitrationFormDisplayed());
-        }
-
-        [Then(@"I Enter all the below required details")]
-        public void ThenIEnterAllTheBelowRequiredDetails(Table table)
-        {
-            IEnumerable<dynamic> reqdetails = table.CreateDynamicSet();            
+            IEnumerable<dynamic> reqdetails = table.CreateDynamicSet();
             foreach (var users in reqdetails)
             {
-                registrationPage.EnterUserDetails(users.FirstName, users.LastName, users.Password, users.Address, users.City, users.ZipCode, users.MobileNo);      
-                registrationPage.SelectState(users.State);
+                errorPage.EnterUserDetails(users.FirstName, users.LastName, users.PhoneNumber, users.Country, users.EmailAddress, users.Password);
             }
         }
 
-        [Then(@"I click on Register button")]
-        public void ThenIClickOnRegisterButton()
+        [Then(@"I click on Register button on Error Page")]
+        public void ThenIClickOnRegisterButtonOnErrorPage()
         {
-            registrationPage.ClickRegisterButton();
-            Thread.Sleep(3000);
+            errorPage.ClickRegisterButton();
+            Thread.Sleep(1000);
         }
 
-        [When(@"I click on Add to Cart for (.*) product")]
-        public void WhenIClickOnAddToCartForStProduct(int n)
+        [Then(@"Verify Last Name is trimmed")]
+        public void ThenVerifyLastNameIsTrimmed()
         {
-            pricelist.Add(homePage.GetProductPrice(n));
-            homePage.SelectAddToCartForProducts(n);
-            Thread.Sleep(3000);
+            if (errorPage.VerifyLastNameTrim() == true)
+            {
+                Assert.Fail("The last character is trimmed from LastName after registration");
+            }
+            Thread.Sleep(1000);
+        }
+        [Then(@"I verify the (.*) message")]
+        public void ThenIVerifyTheSuccessOrFailureMessage(string message)
+        {
+            Assert.That(errorPage.VerifySuccessmessage(message),"There was an error while doing the registration");
+            Thread.Sleep(1000);
         }
 
-        [When(@"I click on Continue Shopping button")]
-        public void WhenIClickOnContinueShoppingButton()
+        [Then(@"Verify Phone Number is incremented by one")]
+        public void ThenVerifyPhoneNumberIsAdded()
         {
-            homePage.ClickContinueButton();
-            Thread.Sleep(2000);
+            if (errorPage.VerifyPhoneNumberIsAdded() == true)
+            {
+                Assert.Fail("The phone number in the result is one greater than the actual phone number after registration");
+            }
+            Thread.Sleep(1000);
         }
 
-        [Then(@"I verify the total price of the products in the cart is correct or not")]
-        public void ThenIVerifyThePriceOfTheProductsInTheCartIsCorrectOrNot()
+        [Then(@"Verify Last Name field is not blank")]
+        public void ThenVerifyLastNameIsNotBlank()
         {
-            homePage.ClickShoppingCartButton();
-            Thread.Sleep(2000);
-            string cartValue = cartPage.TotalCartValue();
-            var firstElement = float.Parse((string)pricelist[0]);
-            var secondElement = float.Parse((string)pricelist[1]);
-            var var1 = (firstElement + secondElement).ToString("F2");
-            Assert.AreEqual(cartValue, var1);
+            if (errorPage.VerifyLastNameIsNotBlank() == true)
+            {
+                Assert.Fail("The Last Name is blank after registration and it is a required field");
+            }
+            Thread.Sleep(1000);
         }
+
+        [Then(@"Verify Password length field is between six and twenty characters")]
+        public void ThenVerifyPasswordField()
+        {
+            if (errorPage.VerifyPasswordfield() == true)
+            {
+                Assert.Pass("The Password length field is not between six and twenty characters message is displayed");
+            }
+            else
+            {
+                Assert.Fail("The Password length field between six and twenty characters but there is an error");
+            }
+            Thread.Sleep(1000);
+        }
+
+        [Then(@"Verify Phone Number field length is atleast ten characters")]
+        public void ThenVerifyPhoneNumberField()
+        {
+            if (errorPage.VerifyPhoneNumberfield() == true)
+            {
+                Assert.Pass("The Phone Number field length is atleast ten characters message is dispalyed");
+            }
+            else
+            {
+                Assert.Fail("The Phone Number field length is atleast ten characters message is not being dispalyed");
+            }
+            Thread.Sleep(1000);
+        }
+
     }
 }

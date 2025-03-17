@@ -1,47 +1,95 @@
 ﻿Feature: DatacomScenariosLogin
 
 
-Scenario Outline: Login to the application
+Scenario Outline: Navigate to the error page
 	Given I navigate to the homepage with the below envrionment
-	| BrowserName | Url                                     |
-	| <Browser>   | http://automationpractice.com/index.php |
-	When I click on login button
-	Then Login page should be displayed
-	When I enter username and password as testuserauto@gmail.com and QssCD123#
-	Examples: 
-	| Browser |
-	| chrome  |
-	| edge    |
-
-Scenario Outline: Register to the application
-	Given I navigate to the homepage with the below envrionment
-	| BrowserName | Url                                     |
-	| <Browser>   | http://automationpractice.com/index.php |
-	When I click on login button
-	Then Login page should be displayed
-	When I enter Email address and click on create account
-	Then Create an account page is displayed
-	And I Enter all the below required details
-    | FirstName | LastName | Password | Address    | City | State  | ZipCode   | MobileNo     |
-    | John      | Bravo    | qwqwe@@  | ABC Street | XYZ  | Kansas | "66002"   | "9898987898" |
-	Then I click on Register button
-
-	Examples: 
+		| BrowserName | Url                                       |
+		| <Browser>   | https://qa-practice.netlify.app/bugs-form |
+	Then Error Home page should be displayed
+Examples:
 	| Browser |
 	| chrome  |
 	| edge    |
 
 
-	Scenario Outline: Add 2 products to shopping cart
+Scenario Outline: Verify the Last Name is trimmed after regirstration
 	Given I navigate to the homepage with the below envrionment
-	| BrowserName | Url                                     |
-	| <Browser>   | http://automationpractice.com/index.php |
-	When I click on Add to Cart for 1 product
-	And I click on Continue Shopping button
-	And I click on Add to Cart for 2 product
-	And I click on Continue Shopping button
-	Then I verify the total price of the products in the cart is correct or not
-	Examples: 
+		| BrowserName | Url                                       |
+		| <Browser>   | https://qa-practice.netlify.app/bugs-form |
+	Then Error Home page should be displayed
+	And I Enter all the form details
+		| FirstName | LastName | PhoneNumber  | Country     | EmailAddress  | Password |
+		| Johnny    | Bravo    | "8109090091" | New Zealand | abc@gmail.com | Pwdqwe   |
+	And I click on Register button on Error Page
+	Then I verify the Success message
+	Then Verify Last Name is trimmed
+Examples:
+	| Browser |
+	| chrome  |
+	| edge    |
+
+
+Scenario Outline: Verify the Phone Number is last digit is one greater than actual phone number after regirstration
+	Given I navigate to the homepage with the below envrionment
+		| BrowserName | Url                                       |
+		| <Browser>   | https://qa-practice.netlify.app/bugs-form |
+	Then Error Home page should be displayed
+	And I Enter all the form details
+		| FirstName | LastName | PhoneNumber  | Country     | EmailAddress  | Password |
+		| Johnny    | Bravo    | "8109090091" | New Zealand | abc@gmail.com | Pwdqwe   |
+	And I click on Register button on Error Page
+	Then I verify the Success message
+	Then Verify Phone Number is incremented by one
+Examples:
+	| Browser |
+	| chrome  |
+	| edge    |
+
+
+Scenario Outline: Verify the Last Name field is required
+	Given I navigate to the homepage with the below envrionment
+		| BrowserName | Url                                       |
+		| <Browser>   | https://qa-practice.netlify.app/bugs-form |
+	Then Error Home page should be displayed
+	And I Enter all the form details
+		| FirstName | LastName | PhoneNumber  | Country     | EmailAddress  | Password |
+		| Johnny    |		   | "8109090091" | New Zealand | abc@gmail.com | Pwdqwe   |
+	And I click on Register button on Error Page
+	Then I verify the Success message
+	Then Verify Last Name field is not blank
+Examples:
+	| Browser |
+	| chrome  |
+	| edge    |
+
+
+Scenario Outline: Verify Password length field is between six and twenty characters
+	Given I navigate to the homepage with the below envrionment
+		| BrowserName | Url                                       |
+		| <Browser>   | https://qa-practice.netlify.app/bugs-form |
+	Then Error Home page should be displayed
+	And I Enter all the form details
+		| FirstName | LastName | PhoneNumber  | Country     | EmailAddress  | Password |
+		| Johnny    | Depp     | "8109090091" | New Zealand | abc@gmail.com | Fivee    |
+	And I click on Register button on Error Page
+	Then Verify Password length field is between six and twenty characters
+Examples:
+	| Browser |
+	| chrome  |
+	| edge    |
+
+
+Scenario Outline: Verify Phone Number field is atleast 10 characters
+	Given I navigate to the homepage with the below envrionment
+		| BrowserName | Url                                       |
+		| <Browser>   | https://qa-practice.netlify.app/bugs-form |
+	Then Error Home page should be displayed
+	And I Enter all the form details
+		| FirstName | LastName | PhoneNumber | Country     | EmailAddress  | Password |
+		| Johnny    | Depp     | "81090"     | New Zealand | abc@gmail.com | Fivee    |
+	And I click on Register button on Error Page
+	Then Verify Phone Number field length is atleast ten characters
+Examples:
 	| Browser |
 	| chrome  |
 	| edge    |
